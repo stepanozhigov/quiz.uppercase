@@ -1,0 +1,91 @@
+.questContent__form {
+
+    //Phone Code style
+    .vue-tel-input {
+        outline: none;
+        border-radius: none;
+        border: none;
+        border-bottom: solid 0.0625rem #d9d7d7;
+    
+        &:focus-within {
+            outline: none;
+            box-shadow: none;
+            border-color: #d9d7d7;
+        }
+    
+        .vti__dropdown {
+    
+            background-color: theme("colors.whitetext");
+            &:hover {
+                background-color: theme("colors.whitetext");
+            }
+            .open {
+                background-color: theme("colors.whitetext");
+            }
+            .show {
+                background-color: theme("colors.whitetext");
+            }
+    
+            .vti__selection {
+                margin-right: 0;
+    
+                .vti__flag {
+                    transform: scale(1.5, 1.5);
+                }
+                .vti__country-code {
+                    @apply font-normal;
+                    color: theme('colors.darktext');
+                    font-size: 1.125rem;
+                    margin-right:.25rem;
+                    display: none;
+    
+                    @screen phone {
+                        display: block;
+                    }
+                }
+                .vti__dropdown-arrow {
+                    color: theme("colors.darktext");
+                    margin-left: 0.35rem;
+                    margin-right: 0.35rem;
+                }
+            }
+            .vti__dropdown-list {
+                .vti__dropdown-item {
+                    color: theme("colors.darktext");
+                    strong {
+                        @apply font-normal;
+                    }
+                    span {
+                        color: theme("colors.darktext");
+                    }
+                }
+            }
+        }
+    
+        input.vti__input {
+
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+
+            color: #14120e;
+            font-size: 1.125rem;
+            height: 3.5rem;
+            outline: none;
+
+            &::placeholder {
+                color: lighten(#14120e,50%);
+            }
+
+            &:focus {
+                outline: none;
+                border-color: #14120e;
+            }
+            
+            &:focus-within {
+                outline: none;
+                border-color: #14120e;
+            }
+        }
+    }
+}
