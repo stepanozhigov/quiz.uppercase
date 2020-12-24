@@ -190,6 +190,7 @@
 						</ul>
 					</div>
 
+					<!-- NUMBER OF DIRECTORS -->
 					<div class="questContent__forLabel questContent_1_2">
 						<p
 							class="questContent__forLabel_title"
@@ -199,7 +200,7 @@
 							<vue-slider
 								class="slider"
 								tooltip="always"
-								:min="0"
+								:min="1"
 								:max="5"
 								v-model="questions.quest_3_r"
 							>
