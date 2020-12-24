@@ -8,7 +8,7 @@ export default new Vuex.Store({
         siteUrl: 'https://uppercase.group/',
         phoneSite: '+971 52 184 1181',
         phoneSiteFormat: '+971521841181',
-        step: 8,
+        step: 0,
         questions: {
             quest_1: 'Нужна помощь для определения типа компании',
             quest_2: 'Требуется помощь в определении',
