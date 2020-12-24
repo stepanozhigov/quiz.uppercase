@@ -22,4 +22,24 @@ const sortCSSmq = require("sort-css-media-queries");
 //         ]
 //     });
 
-mix.js("resources/js/app.js", "public/js");
+mix
+.options({
+    processCssUrls: false,
+    autoprefixer: {
+        browsers: ["last 20 versions"]
+    }
+})
+
+.sourceMaps()
+.webpackConfig({devtool: 'source-map'})
+.sass('resources/sass/app.scss', 'public/css')
+.js("resources/js/app.js", "public/js");
+
+mix.browserSync({
+    proxy: "quiz.uppercase.local",
+    open: false
+});
+
+if (mix.inProduction()) {
+    mix.version();
+}
