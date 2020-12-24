@@ -86,7 +86,7 @@ export default new MLCreate({
             header_thank: 'Thank you',
             header_title_1: ' Please choose your legal structure',
             header_title_2: 'Info about the Shareholder',
-            header_title_3: 'Info about the Directorо',
+            header_title_3: 'Info about the Directors',
             header_title_4: 'UAE Resident Visa for the Shareholders and Employees',
             header_title_5: 'When do you plan to submit your application for UAE company incorporation?',
             header_title_6: 'Tell us about your future business in the UAE',
