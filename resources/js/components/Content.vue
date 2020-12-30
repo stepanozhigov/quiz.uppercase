@@ -514,7 +514,7 @@
 								v-model="phone"
 								v-bind="settings"
 								@validate="onCountryValidate"
-								@onInput="onCountryInput"
+								@onInput="onPhoneInputChange"
 								@country-changed="onCountryChange"
 								placeholder="Ваш телефон *"
 								autocomplete="off"
@@ -561,6 +561,7 @@
 		data: function () {
 			return {
 				phone: "",
+				phoneIsValid: false,
 				settings: {
 					placeholder: "Ваш телефон *",
 					disabledFormatting: false,
@@ -582,17 +583,17 @@
 			};
 		},
 		computed: {
-			...mapGetters(["step", "questions", "isMobile", "siteUrl"]),
+			...mapGetters(["step", "questions", "isMobile", "siteUrl", "utm"]),
 			formValid() {
-				return false;
+				return this.phoneIsValid && this.questions.connection.length > 0;
 			},
 		},
 		methods: {
 			onCountryValidate({ number, isValid, country }) {
 				//console.log(number);
 			},
-			onCountryInput(input) {
-				//console.log(input);
+			onPhoneInputChange(input) {
+				console.log(input);
 				this.phoneIsValid = input.isValid;
 			},
 			onCountryChange(country) {
@@ -609,7 +610,7 @@
 			submitQuiz(e) {
 				e.preventDefault();
 
-				if (this.isValidPhone) {
+				if (this.formValid) {
 					gtag("event", "send", {
 						event_category: "quiz-business-in-UAE",
 					});
@@ -667,15 +668,16 @@
 					axios
 						.post("/leads", {
 							phone: this.phone,
-							tag: "ОАЭ - Квиз",
+							name: "ОАЭ - Квиз",
 							text,
+							utm: this.utm,
 						})
 						.then(() => {
 							this.$store.state.step = 9;
 							fbq("track", "Lead");
-							// setTimeout(() => {
-							//     window.location.href = this.siteUrl;
-							// }, 4000);
+							setTimeout(() => {
+								window.location.href = this.siteUrl;
+							}, 4000);
 						});
 				} else
 					this.$notify({

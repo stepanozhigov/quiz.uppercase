@@ -7,6 +7,7 @@ use App\Lead;
 
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Http;
 
 class LeadController extends Controller
 {
@@ -36,20 +37,30 @@ class LeadController extends Controller
     public function store(Request $request)
     {
         $input = $request->except('_token');
-        $lead = Lead::create($input);
+        //$lead = Lead::create($input);
 
-        $client = new Client();
+        // $client = new Client();
 
-        $amoData = [
+        // $amoData = [
+        //     'url'             => 'quiz.uppercase.group',
+        //     'name'            => $request->input('name',''),
+        //     'phone'           => $request['phone'],
+        //     'lead_comment'    => $request['text'],
+        //     'utm'=>$request->utm
+        // ];
+
+        $response = Http::asForm()->post('https://amoconnect.ru/amo-ipravo/api/slug/uppercase-quiz-group', [
             'url'             => 'quiz.uppercase.group',
-            'name'            => "ОАЭ - Квиз",
+            'name'            => $request->input('name',''),
             'phone'           => $request['phone'],
-            'lead_comment'    => $request['text']
-        ];
-
-        $result = $client->post('https://amoconnect.ru/amo-ipravo/api/slug/uppercase-quiz-group', [
-            'form_params' => $amoData
+            'lead_comment'    => $request['text'],
+            'utm'=>$request->utm
         ]);
+
+
+        // $result = $client->post('https://amoconnect.ru/amo-ipravo/api/slug/uppercase-quiz-group', [
+        //     'form_params' => $amoData
+        // ]);
 
         if (isset($request['phone'])) {
         	$roistatData = array(
@@ -62,6 +73,8 @@ class LeadController extends Controller
         		
         	file_get_contents("https://cloud.roistat.com/api/proxy/1.0/leads/add?" . http_build_query($roistatData));
         }
+
+        return response()->json($response->json());
         
     }
 
