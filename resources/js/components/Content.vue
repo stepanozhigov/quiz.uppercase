@@ -593,7 +593,7 @@
 				//console.log(number);
 			},
 			onPhoneInputChange(input) {
-				console.log(input);
+				// console.log(input);
 				this.phoneIsValid = input.isValid;
 			},
 			onCountryChange(country) {
